@@ -15,4 +15,4 @@ if ! printf '%s\n' "$result" | jq -e '.en' >/dev/null 2>&1 ; then
 fi
 
 printf '%s\n' "$result" | jq -r '.en[] | "\(.partOfSpeech):", (.definitions[].definition)' \
-  | sed 's/<[^>]*>//g'
+  | sed -e 's|<style[^>]*>[^<]*</style>||g' -e 's/<[^>]*>//g'
